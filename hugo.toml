@@ -21,7 +21,7 @@ enableRobotsTXT = true
   mainSections = ["posts", "tech-references", "architecture", "claude-guide"]
 
 [params.homeInfoParams]
-  Title = "Kangyeul's Engineering Blog"
+  Title = "KY's Engineering Blog"
   Content = "기술 학습 노트와 프로젝트 회고를 공유합니다."
 
 [[params.socialIcons]]
