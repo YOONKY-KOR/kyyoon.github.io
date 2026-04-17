@@ -37,6 +37,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add content/posts/
+          git add content/
           git diff --cached --quiet || git commit -m "chore: sync posts from Notion [skip ci]"
           git push

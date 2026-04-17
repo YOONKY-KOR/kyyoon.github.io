@@ -7,14 +7,23 @@ const notion = new Client({ auth: process.env.NOTION_TOKEN });
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
 const DATABASE_ID = process.env.NOTION_DATABASE_ID;
-const OUTPUT_DIR = path.join(__dirname, "../content/posts");
+const CONTENT_ROOT = path.join(__dirname, "../content");
+
+// Notion Category → Hugo section 폴더 매핑
+const CATEGORY_MAP = {
+  "Architecture": "architecture",
+  "Azure": "tech-references",
+  "Claude / AI": "claude-guide",
+  "Dev Notes": "posts",
+  "Japan Life": "posts",
+};
+
+function getSectionDir(category) {
+  return CATEGORY_MAP[category] || "posts";
+}
 
 async function syncPosts() {
   console.log("Fetching posts from Notion...");
-
-  if (!fs.existsSync(OUTPUT_DIR)) {
-    fs.mkdirSync(OUTPUT_DIR, { recursive: true });
-  }
 
   const response = await notion.databases.query({
     database_id: DATABASE_ID,
@@ -30,8 +39,7 @@ async function syncPosts() {
     const props = page.properties;
 
     const title = props.Title?.title?.[0]?.plain_text || "Untitled";
-    const slug =
-      props.Slug?.rich_text?.[0]?.plain_text || slugify(title);
+    const slug = props.Slug?.rich_text?.[0]?.plain_text || slugify(title);
     const date = page.created_time.split("T")[0];
     const tags = (props.Tags?.multi_select || []).map((t) => t.name);
     const category = props.Category?.select?.name || "";
@@ -39,6 +47,13 @@ async function syncPosts() {
     const series = props.Series?.rich_text?.[0]?.plain_text || "";
     const seriesOrder = props["Series Order"]?.number ?? null;
     const coverUrl = props["Cover URL"]?.url || "";
+
+    const section = getSectionDir(category);
+    const outputDir = path.join(CONTENT_ROOT, section);
+
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir, { recursive: true });
+    }
 
     const mdBlocks = await n2m.pageToMarkdown(page.id);
     const mdString = n2m.toMarkdownString(mdBlocks);
@@ -76,14 +91,15 @@ async function syncPosts() {
 
     const content = lines.join("\n") + "\n" + mdString.parent;
     const filename = `${slug}.md`;
-    const filepath = path.join(OUTPUT_DIR, filename);
+    const filepath = path.join(outputDir, filename);
 
     fs.writeFileSync(filepath, content, "utf-8");
-    console.log(`Synced: ${filename}`);
-    syncedFiles.add(filename);
+    console.log(`Synced: ${section}/${filename}`);
+    syncedFiles.add(`${section}/${filename}`);
   }
 
   console.log(`Sync complete. ${syncedFiles.size} post(s) written.`);
+  syncedFiles.forEach((f) => console.log(`  ✓ ${f}`));
 }
 
 function escapeQuotes(str) {
