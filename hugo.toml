@@ -1,5 +1,5 @@
 baseURL = "https://yoonky-kor.github.io/"
-title = "My Engineering Blog"
+title = "KY"
 languageCode = "ko"
 theme = "PaperMod"
 [pagination]
