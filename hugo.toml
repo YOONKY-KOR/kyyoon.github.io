@@ -13,9 +13,9 @@ enableRobotsTXT = true
 
 [params]
   env = "production"
-  title = "KY"
+  title = "Tab"
   description = "Cloud & AI Engineering Blog"
-  author = "KY"
+  author = "author"
   defaultTheme = "auto"
 
   # --- [1. 파비콘 설정] ---
