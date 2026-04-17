@@ -1,0 +1,18 @@
+<script>
+(function () {
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.menu li.has-dropdown').forEach(function (li) {
+            var timer;
+            li.addEventListener('mouseenter', function () {
+                clearTimeout(timer);
+                li.classList.add('is-open');
+            });
+            li.addEventListener('mouseleave', function () {
+                timer = setTimeout(function () {
+                    li.classList.remove('is-open');
+                }, 200);
+            });
+        });
+    });
+})();
+</script>
