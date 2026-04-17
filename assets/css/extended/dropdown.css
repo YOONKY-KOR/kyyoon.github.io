@@ -31,13 +31,24 @@
     transform: rotate(180deg);
 }
 
+/* ── 트리거↔드롭다운 gap 브릿지 (hover 끊김 방지) ── */
+.menu li.has-dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: -10px;
+    right: -10px;
+    height: 12px;
+}
+
 /* ── 드롭다운 메뉴 (float overlay) ── */
 .dropdown-menu {
     display: none;
     position: absolute;
-    top: calc(100% + 10px);
-    left: 50%;
-    transform: translateX(-50%);
+    top: calc(100% + 12px);
+    right: 0;
+    left: auto;
+    transform: none;
     z-index: 99999;
     min-width: 210px;
     padding: 6px 0;
@@ -48,7 +59,6 @@
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     white-space: nowrap;
-    /* 레이아웃 흐름에서 완전히 분리 */
     pointer-events: none;
 }
 
@@ -61,11 +71,11 @@
 @keyframes dropFadeIn {
     from {
         opacity: 0;
-        transform: translateX(-50%) translateY(-4px);
+        transform: translateY(-4px);
     }
     to {
         opacity: 1;
-        transform: translateX(-50%) translateY(0);
+        transform: translateY(0);
     }
 }
 
@@ -97,8 +107,9 @@
     content: "";
     position: absolute;
     top: -7px;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 20px;
+    left: auto;
+    transform: none;
     border: 6px solid transparent;
     border-top: none;
     border-bottom-color: var(--border);
@@ -108,8 +119,9 @@
     content: "";
     position: absolute;
     top: -5px;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 21px;
+    left: auto;
+    transform: none;
     border: 5px solid transparent;
     border-top: none;
     border-bottom-color: var(--theme);
