@@ -4,36 +4,66 @@
     scroll-behavior: smooth;
   }
 
-  /* Profile — min-height 제거하여 뷰포트 전체 점유 해제 */
+  /* ─── 홈 프로필 레이아웃 ──────────────────────────────── */
+
+  /* 프로필 섹션 전체 — 수직 여백 최소화 */
   .main .profile {
     min-height: unset;
-    padding: 2rem 0 1rem;
+    padding: 1.2rem 0 0.5rem;
+    justify-content: center;
   }
 
-  /* Profile inner — 요소 간 간격 축소 */
+  /* 프로필 내부 요소 간격 축소 */
   .profile .profile_inner {
-    gap: 0.5rem;
+    gap: 0.35rem;
   }
 
-  /* Profile 이미지 크기 축소 */
+  /* 프로필 이미지 크기 */
   .profile img {
-    width: 90px !important;
-    height: 90px !important;
+    width: 80px !important;
+    height: 80px !important;
   }
 
-  /* Profile 제목 크기 조정 */
+  /* 프로필 제목 */
   .profile .profile_inner h1 {
-    font-size: 1.4rem;
-    margin: 0;
+    font-size: 1.3rem;
+    margin: 0.2rem 0 0;
   }
 
-  /* Profile 부제목 크기 조정 */
+  /* 프로필 부제목 */
   .profile .profile_inner span {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    color: var(--secondary);
   }
 
-  /* 홈 포스트 목록 상단 여백 축소 */
-  .main > .profile + * {
-    margin-top: 0;
+  /* 소셜 아이콘 세로 여백 */
+  .profile .social-icons {
+    margin: 0.2rem 0 0;
+  }
+
+  /* ─── 홈 전용: 메인 영역 상단 패딩 축소 ─────────────── */
+  /* 홈페이지에서만 .main 상단 여백 줄이기 */
+  body.list .main {
+    padding-top: 6px;
+  }
+
+  /* ─── 포스트 카드 — 홈에서 간결하게 ─────────────────── */
+  .post-entry {
+    padding: 14px var(--gap);
+    margin-bottom: 12px;
+  }
+
+  .entry-header h2 {
+    font-size: 1rem;
+  }
+
+  .entry-content {
+    margin: 4px 0;
+    font-size: 13px;
+    -webkit-line-clamp: 1;
+  }
+
+  .entry-footer {
+    font-size: 12px;
   }
 </style>

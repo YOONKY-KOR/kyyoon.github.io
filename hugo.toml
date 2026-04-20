@@ -308,10 +308,8 @@ enableRobotsTXT = true
   repoId         = "R_kgDOSCJouw"
 
   # category: Discussions 카테고리 이름 (보통 "General" 또는 "Announcements")
-  category       = "General"
-
   # categoryId: giscus.app 에서 확인한 Category ID (DIC_ 로 시작)
-  categoryId     = "YOUR_CATEGORY_ID"
+  categoryId     = "DIC_kwDOSCJou84C7Qo_"
 
   # mapping: 포스트와 Discussion을 연결하는 방식
   #   "pathname" = URL 경로 기준 (권장), "title" = 포스트 제목 기준

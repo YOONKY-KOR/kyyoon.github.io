@@ -3,7 +3,9 @@
   <script src="https://giscus.app/client.js"
     data-repo="{{ site.Params.giscus.repo }}"
     data-repo-id="{{ site.Params.giscus.repoId }}"
-    data-category="{{ site.Params.giscus.category }}"
+    {{- with site.Params.giscus.category }}
+    data-category="{{ . }}"
+    {{- end }}
     data-category-id="{{ site.Params.giscus.categoryId }}"
     data-mapping="{{ site.Params.giscus.mapping | default "pathname" }}"
     data-strict="{{ site.Params.giscus.strict | default "0" }}"
