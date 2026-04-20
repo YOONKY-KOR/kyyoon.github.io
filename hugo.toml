@@ -1,123 +1,250 @@
+# ============================================================
+# [사이트 기본 설정]
+# ============================================================
+# baseURL: 배포되는 실제 사이트 주소. GitHub Pages 주소와 반드시 일치해야 합니다.
 baseURL = "https://yoonky-kor.github.io/"
+
+# title: 브라우저 탭과 meta 태그에 표시되는 사이트 공식 이름입니다.
+#        SEO 및 RSS 피드 제목으로도 사용됩니다.
 title = "KY's Blog"
+
+# languageCode: 사이트 언어 코드 (ko = 한국어, en = 영어)
 languageCode = "ko"
+
+# theme: 사용할 Hugo 테마 이름. themes/ 폴더의 디렉토리명과 일치해야 합니다.
 theme = "PaperMod"
 
+
+# ============================================================
+# [페이지네이션 설정]
+# ============================================================
 [pagination]
+  # pagerSize: 목록 페이지에서 한 번에 표시할 포스트 수
   pagerSize = 5
 
+
+# ============================================================
+# [크롤러 / SEO 설정]
+# ============================================================
+# enableRobotsTXT: true 시 robots.txt 자동 생성 → 검색엔진 크롤링 허용
 enableRobotsTXT = true
 
+
+# ============================================================
+# [출력 포맷 설정]
+# ============================================================
 [outputs]
+  # home: 홈페이지에서 생성할 파일 형식
+  #   HTML  → 일반 웹 페이지
+  #   RSS   → RSS 구독 피드 (/index.xml)
+  #   JSON  → 검색 기능용 인덱스 (/index.json)
   home = ["HTML", "RSS", "JSON"]
 
+
+# ============================================================
+# [PaperMod 테마 파라미터]
+# ============================================================
 [params]
+  # env: 빌드 환경. "production" 시 Google Analytics 등 프로덕션 기능 활성화
   env = "production"
+
+  # title: 사이트 헤더(로고 옆)에 표시되는 이름. baseURL 위의 title과 별개입니다.
+  #        → 헤더 표시명만 바꾸고 싶을 때 여기를 수정하세요.
   title = "Tab"
+
+  # description: meta description 태그. 검색 결과 미리보기 텍스트로 사용됩니다.
   description = "Cloud & AI Engineering Blog"
-  author = "yoonkyl"
+
+  # author: 포스트 작성자 기본값. 각 포스트 front matter에서 개별 오버라이드 가능합니다.
+  author = "Yoon KY"
+
+  # defaultTheme: 기본 컬러 테마 ("auto" = 시스템 설정 따름, "light", "dark")
   defaultTheme = "auto"
 
-  # --- [1. 파비콘 설정] ---
-  # static/ 폴더에 해당 파일들이 있어야 브라우저 탭에 아이콘이 나타납니다.
-  [params.assets]
-    favicon = "/favicon.ico"
-    favicon16x16 = "/favicon-16x16.png"
-    favicon32x32 = "/favicon-32x32.png"
-    apple_touch_icon = "/apple-touch-icon.png"
 
-  # --- [2. UI/UX 설정] ---
+  # ----------------------------------------------------------
+  # [1. 파비콘 설정]
+  # ----------------------------------------------------------
+  # 브라우저 탭 아이콘 설정. 아래 파일들이 static/ 폴더에 있어야 합니다.
+  #   favicon.ico          → 기본 파비콘 (모든 브라우저)
+  #   favicon-16x16.png    → 16×16 파비콘
+  #   favicon-32x32.png    → 32×32 파비콘
+  #   apple-touch-icon.png → iOS 홈 화면 추가 시 표시되는 아이콘 (180×180 권장)
+  [params.assets]
+    favicon            = "/favicon.ico"
+    favicon16x16       = "/favicon-16x16.png"
+    favicon32x32       = "/favicon-32x32.png"
+    apple_touch_icon   = "/apple-touch-icon.png"
+
+
+  # ----------------------------------------------------------
+  # [2. UI/UX 설정]
+  # ----------------------------------------------------------
+  # ShowReadingTime: 포스트 상단에 예상 읽기 시간 표시 (true/false)
   ShowReadingTime = true
-  ShowShareButtons = true      # 포스트 하단 공유 버튼
-  ShowCodeCopyButtons = true   # 코드 블록 복사 버튼
-  ShowPostNavLinks = true      # 이전/다음 글 링크
-  ShowBreadCrumbs = true       # 페이지 경로 표시
-  ShowToc = true               # 목차 표시
-  ShowWordCount = true         # 단어 수 표시
+
+  # ShowShareButtons: 포스트 하단 SNS 공유 버튼 표시 (true/false)
+  ShowShareButtons = true
+
+  # ShowCodeCopyButtons: 코드 블록 우측 상단 복사 버튼 표시 (true/false)
+  ShowCodeCopyButtons = true
+
+  # ShowPostNavLinks: 포스트 하단 이전글/다음글 링크 표시 (true/false)
+  ShowPostNavLinks = true
+
+  # ShowBreadCrumbs: 페이지 상단 경로(breadcrumb) 표시 (true/false)
+  ShowBreadCrumbs = true
+
+  # ShowToc: 포스트 목차(Table of Contents) 표시 (true/false)
+  ShowToc = true
+
+  # ShowWordCount: 포스트 상단 단어 수 표시 (true/false)
+  ShowWordCount = true
+
+  # disableSpecial1stPost: 첫 번째 포스트를 히어로 카드로 강조하는 기능 비활성화
+  #   false = 첫 포스트 강조 활성, true = 비활성
   disableSpecial1stPost = false
+
+  # mainSections: 홈 피드 및 RSS에 포함할 content/ 하위 섹션 목록
+  #   → 새 카테고리 폴더를 추가할 경우 여기에도 등록하세요.
   mainSections = ["posts", "azure", "architecture", "ai"]
 
-  # --- [3. 소셜 커버 이미지] ---
-  # 블로그 링크 공유 시 나타날 기본 이미지 (static/papermod-cover.png)
+
+  # ----------------------------------------------------------
+  # [3. 소셜 커버 이미지]
+  # ----------------------------------------------------------
+  # 카카오톡/슬랙 등 SNS에 링크 공유 시 미리보기로 표시되는 대표 이미지입니다.
+  # 파일 위치: static/papermod-cover.png (권장 크기: 1200×630px)
   images = ["/papermod-cover.png"]
 
+
+# ============================================================
+# [홈 화면 인트로 설정]
+# ============================================================
 [params.homeInfoParams]
+  # Title: 홈 화면 상단에 크게 표시되는 제목
   Title = "KY's Engineering Blog"
+
+  # Content: 제목 아래 표시되는 소개 문구 (Markdown 사용 가능)
   Content = "클라우드 아키텍처와 AI 기술 학습 노트를 공유합니다."
-  
-  # --- [4. 홈 프로필 이미지 설정] ---
-  # static/profile.png 경로의 파일을 첫 화면에 표시합니다.
-  imageUrl = "/profile.png"
-  imageWidth = 120
+
+  # ----------------------------------------------------------
+  # [4. 홈 프로필 이미지 설정]
+  # ----------------------------------------------------------
+  # 홈 인트로 옆에 표시되는 프로필 이미지입니다.
+  # 파일 위치: static/profile.png
+  # imageWidth / imageHeight: 픽셀 단위 표시 크기
+  imageUrl    = "/profile.png"
+  imageWidth  = 120
   imageHeight = 120
+
+
+# ============================================================
+# [소셜 아이콘 설정]
+# ============================================================
+# 헤더 또는 홈에 표시되는 소셜 링크입니다.
+# name: PaperMod 지원 아이콘명 (github, twitter, linkedin, email, rss 등)
+# url: 연결할 주소
 
 [[params.socialIcons]]
   name = "github"
-  url = "https://github.com/YOONKY-KOR"
+  url  = "https://github.com/YOONKY-KOR"
 
 [[params.socialIcons]]
   name = "email"
-  url = "mailto:yoonky1757@gmail.com"
+  url  = "mailto:yoonky1757@gmail.com"
 
+
+# ============================================================
+# [검색 설정 (Fuse.js)]
+# ============================================================
+# PaperMod 내장 검색은 Fuse.js를 사용합니다.
 [params.fuseOpts]
+  # isCaseSensitive: 대소문자 구분 여부 (false = 구분 안 함)
   isCaseSensitive = false
+
+  # shouldSort: 검색 결과를 관련도 순으로 정렬 (true 권장)
   shouldSort = true
+
+  # threshold: 검색 민감도 (0.0 = 완전일치만, 1.0 = 모두 매칭. 0.3~0.5 권장)
   threshold = 0.4
+
+  # keys: 검색 대상 필드 목록
   keys = ["title", "permalink", "summary", "content"]
 
-# --- [5. 메뉴 설정] ---
+
+# ============================================================
+# [5. 메뉴 설정]
+# ============================================================
+# 상단 네비게이션 메뉴를 구성합니다.
+# identifier : 메뉴 고유 ID (중복 불가)
+# name       : 화면에 표시되는 메뉴 이름
+# url        : 클릭 시 이동할 경로 (content/ 폴더 구조와 일치해야 합니다)
+# weight     : 숫자가 낮을수록 왼쪽에 배치됩니다
+# parent     : 드롭다운 하위 메뉴일 경우 부모 identifier 지정
+
 [[menu.main]]
   identifier = "about"
-  name = "About"
-  url = "/about/"
-  weight = 10
+  name       = "About"
+  url        = "/about/"
+  weight     = 10
 
 [[menu.main]]
   identifier = "blog"
-  name = "Blog"
-  url = "/posts/"
-  weight = 20
+  name       = "Blog"
+  url        = "/posts/"
+  weight     = 20
 
+# Categories 드롭다운 부모 메뉴 (url 없음 → 클릭 시 하위 메뉴 펼침)
 [[menu.main]]
   identifier = "categories"
-  name = "Categories"
-  weight = 30
+  name       = "Categories"
+  weight     = 30
 
+# Categories 하위 메뉴 (parent = "categories" 로 드롭다운에 포함)
 [[menu.main]]
-  parent = "categories"
+  parent     = "categories"
   identifier = "ai"
-  name = "AI"
-  url = "/ai/"
-  weight = 1
+  name       = "AI"
+  url        = "/ai/"
+  weight     = 1
 
 [[menu.main]]
-  parent = "categories"
+  parent     = "categories"
   identifier = "architecture"
-  name = "Architecture"
-  url = "/architecture/"
-  weight = 2
+  name       = "Architecture"
+  url        = "/architecture/"
+  weight     = 2
 
 [[menu.main]]
-  parent = "categories"
+  parent     = "categories"
   identifier = "azure"
-  name = "Azure"
-  url = "/azure/"
-  weight = 3
+  name       = "Azure"
+  url        = "/azure/"
+  weight     = 3
 
 [[menu.main]]
   identifier = "search"
-  name = "Search"
-  url = "/search/"
-  weight = 40
+  name       = "Search"
+  url        = "/search/"
+  weight     = 40
 
 [[menu.main]]
   identifier = "archives"
-  name = "Archives"
-  url = "/archives/"
-  weight = 50
+  name       = "Archives"
+  url        = "/archives/"
+  weight     = 50
 
-# --- [6. 택소노미(분류) 설정] ---
+
+# ============================================================
+# [6. 택소노미(분류) 설정]
+# ============================================================
+# 포스트 front matter에서 사용할 분류 체계를 정의합니다.
+# 형식: 단수형_키 = "복수형_URL경로"
+#   category → /categories/ 페이지 생성
+#   tag      → /tags/ 페이지 생성
+#   series   → /series/ 페이지 생성 (연재글 묶음)
 [taxonomies]
   category = "categories"
-  tag = "tags"
-  series = "series"
+  tag      = "tags"
+  series   = "series"
