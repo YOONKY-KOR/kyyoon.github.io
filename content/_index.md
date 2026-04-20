@@ -1,0 +1,3 @@
+---
+images: ["/papermod-cover.png"]
+---
