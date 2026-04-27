@@ -1,9 +1,63 @@
 {{- define "main" }}
 
 {{- if (and site.Params.profileMode.enabled .IsHome) }}
-{{- partial "index_profile.html" . }}
-{{- partial "home_widgets.html" . }}
+
+{{- /* ── 홈: 좌(사이드바) / 우(포스트) 2단 레이아웃 ── */}}
+<div class="home-layout">
+
+  <aside class="home-sidebar">
+    {{- partial "index_profile.html" . }}
+    {{- partial "home_widgets.html" . }}
+  </aside>
+
+  <div class="home-posts">
+    {{- $pages := where site.RegularPages "Section" "in" site.Params.mainSections }}
+    {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
+    {{- $pages = $pages.ByDate.Reverse }}
+    {{- $paginator := .Paginate $pages }}
+    {{- $homeLimit := 5 }}
+
+    {{- range $index, $page := $paginator.Pages }}
+    {{- if (ge $index $homeLimit) }}{{- continue }}{{- end }}
+    <article class="post-entry">
+      {{- $isHidden := ($page.Param "cover.hiddenInList") | default ($page.Param "cover.hidden") | default false }}
+      {{- partial "cover.html" (dict "cxt" $page "IsSingle" false "isHidden" $isHidden) }}
+      <header class="entry-header">
+        <h2 class="entry-hint-parent">
+          {{- $page.Title }}
+          {{- if $page.Draft }}
+          <span class="entry-hint" title="Draft">
+            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+              <path d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+            </svg>
+          </span>
+          {{- end }}
+        </h2>
+      </header>
+      {{- if (ne ($page.Param "hideSummary") true) }}
+      <div class="entry-content">
+        <p>{{ $page.Summary | plainify | htmlUnescape }}{{ if $page.Truncated }}...{{ end }}</p>
+      </div>
+      {{- end }}
+      {{- if not ($page.Param "hideMeta") }}
+      <footer class="entry-footer">
+        {{- partial "post_meta.html" $page -}}
+      </footer>
+      {{- end }}
+      <a class="entry-link" aria-label="post link to {{ $page.Title | plainify }}" href="{{ $page.Permalink }}"></a>
+    </article>
+    {{- end }}
+
+    <div class="home-all-posts">
+      <a href="{{ "/posts/" | relURL }}">모든 포스트 보기 →</a>
+    </div>
+  </div>
+
+</div>
+
 {{- else }}
+
+{{- /* ── 비홈: 일반 섹션·태그 목록 ── */}}
 
 {{- if not .IsHome | and .Title }}
 <header class="page-header">
@@ -39,15 +93,7 @@
 </div>
 {{- end }}
 
-{{- end }}{{/* end profileMode check */}}
-
 {{- $pages := union .RegularPages .Sections }}
-
-{{- if .IsHome }}
-{{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
-{{- end }}
-
 {{- $paginator := .Paginate $pages }}
 
 {{- if and .IsHome site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
@@ -55,12 +101,8 @@
 {{- end }}
 
 {{- $term := .Data.Term }}
-{{- $homeLimit := 3 }}
 {{- range $index, $page := $paginator.Pages }}
-{{- if and $.IsHome (ge $index $homeLimit) }}{{- continue }}{{- end }}
-
 {{- $class := "post-entry" }}
-
 {{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams site.Params.profileMode.enabled }}
 {{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) }}
 {{- $class = "first-entry" }}
@@ -77,8 +119,7 @@
       {{- if .Draft }}
       <span class="entry-hint" title="Draft">
         <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+          <path d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
         </svg>
       </span>
       {{- end }}
@@ -120,5 +161,7 @@
   </nav>
 </footer>
 {{- end }}
+
+{{- end }}{{- /* end profileMode/home check */ -}}
 
 {{- end }}{{- /* end main */ -}}
