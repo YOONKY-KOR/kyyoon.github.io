@@ -1,20 +1,48 @@
 <div class="home-widgets">
 
-  <!-- ① GitHub Stats 카드 -->
+  <!-- GitHub Stats 카드 -->
   <div class="widget-github-stats">
     <a href="https://github.com/YOONKY-KOR" target="_blank" rel="noopener">
       <picture>
         <source media="(prefers-color-scheme: dark)"
-          srcset="https://github-readme-stats.vercel.app/api?username=YOONKY-KOR&show_icons=true&theme=dark&hide_border=true&bg_color=1d1e20&title_color=58a6ff&icon_color=58a6ff&text_color=c9d1d9&rank_icon=github" />
+          srcset="https://github-readme-stats.vercel.app/api?username=YOONKY-KOR&show_icons=true&hide_border=true&bg_color=1d1e20&title_color=58a6ff&icon_color=58a6ff&text_color=c9d1d9&rank_icon=github&custom_title=KY's%20GitHub" />
         <img
-          src="https://github-readme-stats.vercel.app/api?username=YOONKY-KOR&show_icons=true&theme=default&hide_border=true&bg_color=ffffff&title_color=0078D4&icon_color=0078D4&rank_icon=github"
+          src="https://github-readme-stats.vercel.app/api?username=YOONKY-KOR&show_icons=true&hide_border=true&bg_color=ffffff&title_color=0078D4&icon_color=0078D4&rank_icon=github&custom_title=KY's%20GitHub"
           alt="GitHub Stats"
           loading="lazy" />
       </picture>
     </a>
   </div>
 
-  <!-- ③ 기술 스택 배지 -->
+  <!-- Top Languages 카드 -->
+  <div class="widget-github-stats">
+    <a href="https://github.com/YOONKY-KOR" target="_blank" rel="noopener">
+      <picture>
+        <source media="(prefers-color-scheme: dark)"
+          srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=YOONKY-KOR&layout=compact&hide_border=true&bg_color=1d1e20&title_color=58a6ff&text_color=c9d1d9&langs_count=6" />
+        <img
+          src="https://github-readme-stats.vercel.app/api/top-langs/?username=YOONKY-KOR&layout=compact&hide_border=true&bg_color=ffffff&title_color=0078D4&langs_count=6"
+          alt="Top Languages"
+          loading="lazy" />
+      </picture>
+    </a>
+  </div>
+
+  <!-- GitHub Streak 카드 -->
+  <div class="widget-github-stats">
+    <a href="https://github.com/YOONKY-KOR" target="_blank" rel="noopener">
+      <picture>
+        <source media="(prefers-color-scheme: dark)"
+          srcset="https://streak-stats.demolab.com?user=YOONKY-KOR&hide_border=true&background=1d1e20&ring=58a6ff&fire=58a6ff&currStreakLabel=58a6ff&sideLabels=c9d1d9&sideNums=c9d1d9&currStreakNum=c9d1d9&dates=c9d1d9" />
+        <img
+          src="https://streak-stats.demolab.com?user=YOONKY-KOR&hide_border=true&ring=0078D4&fire=0078D4&currStreakLabel=0078D4"
+          alt="GitHub Streak"
+          loading="lazy" />
+      </picture>
+    </a>
+  </div>
+
+  <!-- 기술 스택 배지 -->
   <div class="widget-badges">
     <img src="https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white" alt="Azure" />
     <img src="https://img.shields.io/badge/Claude_AI-D97706?style=flat-square&logo=anthropic&logoColor=white" alt="Claude AI" />
@@ -30,22 +58,23 @@
   .home-widgets {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
-    margin: 0.5rem 0 1rem;
+    align-items: flex-start;
+    gap: 0.7rem;
+    margin: 0.3rem 0 0;
   }
 
   .widget-github-stats img {
-    max-width: 100%;
-    width: 420px;
+    width: 100%;
+    max-width: 260px;
     border-radius: 8px;
+    display: block;
   }
 
   .widget-badges {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
+    justify-content: flex-start;
+    gap: 5px;
   }
 
   .widget-badges img {
