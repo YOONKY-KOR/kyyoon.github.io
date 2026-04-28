@@ -67,7 +67,7 @@ enableRobotsTXT = true
 
   # title: 사이트 헤더(로고 옆)에 표시되는 이름. baseURL 위의 title과 별개입니다.
   #         → 헤더 표시명만 바꾸고 싶을 때 여기를 수정하세요.
-  title = "Tab"
+  title = "KY's Blog"
 
   # description: meta description 태그. 검색 결과 미리보기 텍스트로 사용됩니다.
   description = "Cloud & AI Engineering Blog"
@@ -160,7 +160,7 @@ enableRobotsTXT = true
   enabled = true
 
   # title: 홈 화면 프로필 영역의 메인 제목
-  title = "KY's Engineering Blog"
+  title = "KY's Blog"
 
   # subtitle: 제목 아래 표시되는 한 줄 소개 문구
   subtitle = "클라우드 아키텍처와<br>AI 기술 학습 노트를 공유합니다."
